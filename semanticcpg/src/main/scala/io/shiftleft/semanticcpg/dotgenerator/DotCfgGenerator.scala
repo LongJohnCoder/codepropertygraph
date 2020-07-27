@@ -3,12 +3,14 @@ package io.shiftleft.semanticcpg.dotgenerator
 import io.shiftleft.codepropertygraph.generated.nodes
 import io.shiftleft.semanticcpg.language._
 import overflowdb.Node
+import overflowdb.traversal.Traversal
 
 import scala.jdk.CollectionConverters._
 
 object DotCfgGenerator {
 
-  def toDotCfg[T <: nodes.CfgNode](step: NodeSteps[T]): Steps[String] = step.map(dotCfg)
+  def toDotCfg[T <: nodes.CfgNode](traversal: Traversal[T]): Traversal[String] =
+    traversal.map(dotCfg)
 
   def dotCfg(cfgRoot: nodes.CfgNode): String = {
     cfgRoot match {
